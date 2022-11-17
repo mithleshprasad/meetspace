@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>meet_up</title>
+    <link rel="stylesheet" href="public/Assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/Assets/css/style.css">
+    
+   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>    <script src="public/Assets/js/jquery-3.4.1.min.js"></script>
+    <script src="public/Assets/js/app.js"></script>
+    <script>
+        $(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            var meeting_id = urlParams.get('meetingID');
+            var user_id = window.prompt('Enter your userid');
+            if (!user_id || !meeting_id) {
+                alert('User id or meeting id missing');
+                window.location.href = '/action.html';
+                return;
+            }
+            $("#meetingContainer").show();
+            MyApp._init(user_id, meeting_id);
+        })
+    </script>
+
+</head>
+
+<body>
+    <main class=" d-flex-column  home-wrap">
+        <div class="g-top text-light">
+            <div class="top-remote-video-show d-flex">
+                <div id="meetingContainer"  style="display:none; flex-basis: 75%; ">
+                    <div class="class-wrap" style="background-color:black;">
+                        <div class="video-wrap" id="divUsers" style="display:flex; flex-wrap:wrap;">
+
+                            <div id="me" class="userbox display-center flex-column">
+                                <h2 class="display-center" style="font-size:14px;">
+
+                                </h2>
+                                <div class="display-center">
+                                    <video autoplay muted id="locaVideoPlayer"></video>
+                                </div>
+                            </div>
+                            <div id="otherTemplate" class="userbox display-center flex-column" style="display:none;">
+                                <h2 class="display-center" style="font-size:14px;"></h2>
+                                <div class="display-center">
+                                    <video id="v_sdfwerwr354fsd" autoplay muted></video>
+                                    <audio autoplay controls  style="display:none;"></audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="g-right-details-wrap bg-light text-secondary h-100" style="flex-basis: 25%; z-index: 1;" >
+                    <div class="meeting-heading-wrap d-flex justify-content-between align-items-center pr-3 pl-3" style="height: 10vh;">
+                         <div class="people-heading  display-center cursor-pointer">
+                            <div class="people-heading-icon display-center mr-1"><span class="material-icons">people</span></div>
+                            <div class="people-heading-text display-center ">Participant (<span class="participant-count">1</span>)
+
+                            </div>
+                         </div>
+                         <div class="chat-heading d-flex just-content-round align-items-center cursor-pointer mr-1"><span class="material-icons">message</span></div>
+                         <div class="chat-heading-text"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div
+                class="g-top-left bg-light text-secondary w-25 d-flex align-items-center justify-content-between pl-2 pr-2">
+                <div class="top-left-participant-wrap pt-2 cursor-pointer"></div>
+                <div class="top-left-chat-wrap pt-2 cursor-pointer">
+                    <div class="top-left-participant-icon"><span class="material-icons">people</span>
+
+                    </div>
+                    <div class="top-left-participant-count"></div>
+                </div>
+                <div class="top-left-chat-wrap pt-2 cursor-pointer">
+                    <span class="material-icons">message</span>
+                </div>
+                <div class="top-left-time-wrap"></div>
+            </div>
+        </div>
+        <div class="g-bottom bg-light m-0 d-flex justify-content-between align-items-center">
+            <div class="bottom-left d-flex" style="height:10vh;">
+                <div class="display-center cursor-pointer meeting-details-button">
+                    Meeting Details <span class="material-icons">keyboard_arrow_down</span>
+                </div>
+            </div>
+            <div class="bottom-middle d-flex just-content-center align-items-center" style="height:10vh;">
+                <div class="mic-toggle-wrap action-icon-style display-center mr-2 cursor-pointer" id="micMuteUnmute">
+                    <span class="material-icons" style="width:100%;">mic_off</span>
+                </div>
+                <div class="end-call-wrap action-icon-style display-center mr-2 cursor-pointer">
+                    <span class="material-icons text-danger">call</span>
+                </div>
+                <div class="video-toggle-wrap action-icon-style display-center cursor-pointer" id="videoCamOnOff"><span
+                        class="material-icons" style="width: 100%;">videocam_off</span></div>
+            </div>
+            <div class="bottom-right d-flex just-content-center align-items-center mr-3" style="height:10vh;">
+                <div class="prensent-now-wrap d-flex just-content-center flex-column align-items-center mr-5 cursor-pointer"
+                    id="ScreenShareOnOf">
+                    <span class="material-icons">present_to_all</span>
+                    <div>Present Now</div>
+
+                </div>
+                <div class="option-wrap cursor-pointer display-center" style="height:10vh; position:relative;">
+                    <span class="material-icons">more_vert</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
